@@ -1,4 +1,4 @@
-# Tidal2Strawberry
+# Strawberry Tidal Tools
 
 Ce projet permet de convertir des playlists Tidal en playlists compatibles Strawberry, puis d'automatiser l'enregistrement (ripping) des morceaux lus dans Strawberry, quel que soit le service de streaming utilisé.
 
