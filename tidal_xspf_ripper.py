@@ -303,11 +303,9 @@ def main():
 
         subprocess.run(["playerctl","--player",PLAYER,"open",tmp])
 
-        time.sleep(2)
+        time.sleep(5)
 
         subprocess.run(["playerctl","--player",PLAYER,"pause"])
-
-        time.sleep(3)
 
         meta = get_metadata()
 
