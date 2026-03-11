@@ -291,6 +291,8 @@ def main():
     log.info(f"Tracks found : {len(tracks)}")
 
     pipe = AudacityPipe()
+    pipe.command("SelectAll:")
+    pipe.command("RemoveTracks:")
 
     for i, track in enumerate(tracks, 1):
 
@@ -305,6 +307,8 @@ def main():
 
         subprocess.run(["playerctl","--player",PLAYER,"pause"])
 
+        time.sleep(3)
+
         meta = get_metadata()
 
         cover_tmp = wait_for_cover()
@@ -317,7 +321,7 @@ def main():
 
         time.sleep(1)
 
-        subprocess.run(["playerctl","--player",PLAYER,"play"])
+        subprocess.run(["playerctl","--player",PLAYER,"open",tmp])
 
         wait_track_end(meta.get("title"))
 
