@@ -6,7 +6,7 @@ Ce projet permet de convertir des playlists Tidal en playlists compatibles Straw
 
 - **Authentification Tidal** : Connecte Strawberry à Tidal via OAuth et injecte les tokens dans la configuration de Strawberry.
 - **Conversion de playlists** : Convertit une playlist Tidal en fichier `.xspf` compatible Strawberry.
-- **Ripping automatisé** : Deux modes de rip automatisé depuis Strawberry :
+- **Ripping automatisé** (fonctionne avec Audacity via pipe) : Deux modes de rip automatisé depuis Strawberry :
   - **Ripper général (strawberry_ripper.py)** :
     - Enregistre tous les morceaux joués dans une playlist chargée dans Strawberry.
     - Fonctionne avec n'importe quel flux supporté par Strawberry (Tidal, Qobuz, fichiers locaux, etc.), du moment que la playlist est chargée.
@@ -67,6 +67,21 @@ Ce projet permet de convertir des playlists Tidal en playlists compatibles Straw
   - Choisis explicitement le périphérique de sortie audio dans les paramètres audio de Strawberry (Préférences > Lecture > Périphérique de sortie).
   - Assure-toi que le périphérique sélectionné correspond à celui utilisé par Audacity pour l'enregistrement, afin d'éviter tout problème de capture du son.
 
+### 2bis. Configuration d'Audacity (script pipe)
+
+![Audacity interface](img/audacity-1.png)
+![Audacity config 1](img/audacity-config-1.png)
+![Audacity config 2](img/audacity-config-2.png)
+
+**Points essentiels pour Audacity :**
+
+- Installe impérativement le module `mod-script-pipe` pour Audacity (souvent disponible dans les options d'installation avancées ou via les paquets additionnels).
+- Vérifie que le module est bien activé (menu Outils > Modules > mod-script-pipe doit être sur "Activé").
+- Redémarre Audacity après activation.
+- Le script pipe permet aux ripper de piloter Audacity automatiquement, sans intervention manuelle.
+
+*Sans mod-script-pipe, aucune automatisation n'est possible !*
+
 ### 3. Conversion de playlist Tidal
 
 ![Conversion étape 1](img/converter-1.png)
@@ -90,11 +105,13 @@ Ce projet permet de convertir des playlists Tidal en playlists compatibles Straw
   - Fonctionne avec n'importe quelle source supportée par Strawberry (Tidal, Qobuz, fichiers locaux, etc.).
   - Suit les changements de piste automatiquement.
   - Idéal pour ripper une session d'écoute ou une playlist manuellement chargée.
+   - Fonctionne en automatisant Audacity via le script pipe (aucune intervention manuelle dans Audacity).
 
 - **tidal_xspf_ripper.py**
   - Récupère les morceaux depuis un fichier `.xspf` généré à partir d'une playlist Tidal.
   - Charge chaque morceau un par un dans Strawberry, puis l'enregistre.
   - Plus automatisé pour ripper une playlist Tidal complète sans intervention.
+   - Utilise également Audacity via pipe pour automatiser l'enregistrement de chaque piste.
 
   - Lors de l'export de chaque morceau, les **métadonnées** (titre, artiste, album) sont automatiquement injectées dans le fichier FLAC, ainsi que la **pochette d'album** (si disponible). Cela permet d'avoir des fichiers parfaitement tagués et illustrés dans ta bibliothèque musicale.
 
