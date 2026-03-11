@@ -303,7 +303,7 @@ def main():
 
         subprocess.run(["playerctl","--player",PLAYER,"open",tmp])
 
-        time.sleep(5)
+        time.sleep(20)
 
         subprocess.run(["playerctl","--player",PLAYER,"pause"])
 
